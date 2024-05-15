@@ -18,6 +18,7 @@ const validateLogin = async (data: IValidateLogin): Promise<void> => {
             }
         );
         localStorage.setItem("token", JSON.stringify(response.data.AccessToken)) // LocalStorage Token Save
+        localStorage.setItem("refreshToken", JSON.stringify(response.data.RefreshToken)) // LocalStorage RefreshToken Save
         return response.data.AccessToken;
     } catch (error) {
         console.error('Error fetching data:', error);
@@ -25,9 +26,16 @@ const validateLogin = async (data: IValidateLogin): Promise<void> => {
 };
 
 
+
 // > Login Logout 
 const logout = () => {
-    localStorage.removeItem("token");
+    try {
+        localStorage.removeItem('token');
+        localStorage.removeItem('refreshToken');
+        return true;
+    } catch (error) {
+        console.error('Error fetching data:', error);
+    }
 
 }
 

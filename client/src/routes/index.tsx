@@ -3,6 +3,12 @@ import { useAuth } from "../providers/auth.provider";
 import { ProtectedRoute } from "./ProtectedRoute";
 import { ListContainer } from "../pages/list/ListContainer";
 import Auth from "../pages/auth/Auth";
+import { OurTeam } from "../pages/ourteam/OurTeam";
+import { About } from "../pages/about/About";
+import { Help } from "../pages/help/Help";
+import { Profile } from "../pages/profile/Profile";
+import { Home } from "../pages/home/Home";
+import { Logout } from "../pages/logout/Logout";
 
 const Routes = () => {
     const { token } = useAuth();
@@ -15,15 +21,15 @@ const Routes = () => {
         },
         {
             path: "/our-team",
-            element: <div>Our team Page</div>,
+            element: <OurTeam />,
         },
         {
             path: "/about-us",
-            element: <div>About Us Page</div>,
+            element: <About />,
         },
         {
             path: "/help",
-            element: <div>Help Page</div>,
+            element: <Help />,
         },
     ];
 
@@ -35,7 +41,7 @@ const Routes = () => {
             children: [
                 {
                     path: "/",
-                    element: <div>Home Page</div>,
+                    element: <Home />,
                 },
                 {
                     path: "/list",
@@ -43,11 +49,11 @@ const Routes = () => {
                 },
                 {
                     path: "/profile",
-                    element: <div>User Profile</div>,
+                    element: <Profile />,
                 },
                 {
                     path: "/logout",
-                    element: <div>Logout</div>,
+                    element: <Logout />,
                 },
             ],
         },
@@ -57,7 +63,7 @@ const Routes = () => {
     const routesForNotAuthenticatedOnly = [
         {
             path: "/",
-            element: <div>Home Page</div>,
+            element: <Home />,
         },
         {
             path: "auth/login",

@@ -1,4 +1,4 @@
-import { Button, Card, CardBody, CardFooter, CardHeader, Divider, Flex, Heading, Input, InputGroup, InputLeftElement, InputRightElement, Link, Stack, Text } from "@chakra-ui/react"
+import { Alert, AlertIcon, Button, Card, CardBody, CardFooter, CardHeader, Divider, Flex, Heading, Input, InputGroup, InputLeftElement, InputRightElement, Link, Stack, Text } from "@chakra-ui/react"
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
 import { useContext, useState } from "react"
 import { LoginContext } from "../../../providers/login.provider";
@@ -8,6 +8,8 @@ export const Login = () => {
     const handleClick = () => setShow(!show)
 
     const { setLoginData } = useContext(LoginContext);
+
+    const [error, setError] = useState<string | undefined>(undefined);
 
     const [number, setNumber] = useState('+90')
     const [password, setPassword] = useState('')
@@ -20,7 +22,9 @@ export const Login = () => {
                 scope: "WEB"
             }).then((data) => setLoginData(data))
         }
+        else setError('Please fill in code field. !');
     }
+
 
 
     return (
@@ -31,6 +35,13 @@ export const Login = () => {
                     <Text color={'gray.500'} fontSize={'small'}>
                         Cihaz size ait değilse oturum açmak için tarayıcının Gizli Pencere özelliğini kullanabilirsiniz.
                     </Text>
+                    {error
+                        ? <Alert status='error'>
+                            <AlertIcon />
+                            {error}
+                        </Alert>
+                        : <></>
+                    }
                 </Stack>
             </CardHeader>
             <CardBody>

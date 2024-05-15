@@ -1,4 +1,4 @@
-import { Button, Card, CardBody, CardFooter, CardHeader, Flex, Heading, Input, InputGroup, Stack, Text } from "@chakra-ui/react"
+import { Alert, AlertIcon, Button, Card, CardBody, CardFooter, CardHeader, Flex, Heading, Input, InputGroup, Stack, Text } from "@chakra-ui/react"
 import { useContext, useState } from "react"
 
 import { LoginContext } from "../../../providers/login.provider";
@@ -8,6 +8,9 @@ import { useNavigate } from "react-router-dom";
 export const AppylCode = () => {
     const navigate = useNavigate();
     const { loginData } = useContext(LoginContext);
+    const [error, setError] = useState<string | undefined>(undefined);
+
+
     const [code, setCode] = useState<number | string>()
     const handleSubmit = () => {
         if (code && loginData) {
@@ -20,6 +23,7 @@ export const AppylCode = () => {
             }
             )
         }
+        else setError('Please fill in all fields. !');
     }
 
 
@@ -32,6 +36,13 @@ export const AppylCode = () => {
                     <Text color={'gray.500'} fontSize={'medium'}>
                         {`${loginData.challenges[0].receiver} numarasına gönderilen 6 haneli doğrulama kodunuzu girin.`}
                     </Text>
+                    {error
+                        ? <Alert status='error'>
+                            <AlertIcon />
+                            {error}
+                        </Alert>
+                        : <></>
+                    }
                 </Stack>
             </CardHeader>
             <CardBody>
