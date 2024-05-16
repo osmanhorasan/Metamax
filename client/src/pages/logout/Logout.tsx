@@ -11,6 +11,8 @@ export const Logout = () => {
 
     const Logout = async () => {
         if (authService.logout()) {
+            localStorage.removeItem('token');
+            localStorage.removeItem('refreshToken');
             setAuth(false);
             native('/');
         }
